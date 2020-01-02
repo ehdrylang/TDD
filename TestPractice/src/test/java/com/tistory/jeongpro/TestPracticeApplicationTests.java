@@ -9,5 +9,5 @@ class TestPracticeApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+	
 }
