@@ -1,6 +1,8 @@
 package com.tistory.jeongpro.string;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,14 +36,31 @@ public class StringApiTests {
 	}
 	@Test
 	public void equalsIgnoreCase_UppercaseString_returnTrue() {
-		assertFalse(firstName.equals(firstName_upper));
+		assertTrue(firstName.equalsIgnoreCase(firstName_upper));
 	}
 	@Test
 	public void equalsIgnoreCase_differenceConstructorString_returnTrue() {
-		assertFalse(firstName.equals(firstName_differenceConstructor));
+		assertTrue(firstName.equalsIgnoreCase((firstName_differenceConstructor)));
 	}
 	@Test
 	public void equalsIgnoreCase_differenceString_returnFalse() {
 		assertFalse(firstName.equalsIgnoreCase(lastName));
 	}
+	@Test
+	public void charAt_normal() {
+		assertEquals('p', firstName.charAt(0));
+	}
+	@Test
+	public void charAt_negativeParameter_returnIndexOutOfBoundException() {
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			firstName.charAt(-1);
+		});
+	}
+	@Test
+	public void charAt_greaterThenLength_returnIndexOutOfBoundException() {
+		assertThrows(IndexOutOfBoundsException.class, () -> {
+			firstName.charAt(firstName.length() + 1);
+		});
+	}
+	
 }
