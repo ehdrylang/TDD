@@ -75,4 +75,24 @@ public class StringApiTests {
 	public void compareTo_sameValue_returnZero() {
 		assertEquals(0, firstName.compareTo(firstName));
 	}
+	@Test
+	public void compareTo_upperCaseTarget_returnNegative() {
+		assertTrue(firstName.compareTo(firstName_upper) > 0);
+	}
+	@Test
+	public void compareTo_upperCaseTarget_returnZero() {
+		assertEquals(0, firstName.compareToIgnoreCase(firstName_upper));
+	}
+	@Test
+	public void concat_normalCase_returnTrue() {
+		assertEquals("projeong", firstName.concat(lastName));
+	}
+	@Test
+	public void concat_eachEmptyString_returnEmptyString() {
+		assertEquals("", "".concat(""));
+	}
+	@Test
+	public void concat_emptyStringTarget_returnOriginString() {
+		assertEquals(firstName, firstName.concat(""));
+	}
 }
