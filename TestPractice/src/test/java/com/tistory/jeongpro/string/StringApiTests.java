@@ -30,20 +30,18 @@ public class StringApiTests {
 	}
 	@Test
 	public void equals_differenceString_returnFalse() {
-		final String name = "jeong";
-		final String name2 = "pro";
-		assertFalse(name.equals(name2));
+		assertFalse(firstName.equals(lastName));
 	}
 	@Test
 	public void equalsIgnoreCase_UppercaseString_returnTrue() {
-		final String name = "jeong";
-		final String name2 = name.toUpperCase();
-		assertTrue(name.equalsIgnoreCase(name2));
+		assertFalse(firstName.equals(firstName_upper));
 	}
 	@Test
 	public void equalsIgnoreCase_differenceConstructorString_returnTrue() {
-		final String name = "jeong";
-		final String name2 = new String("jeong");
-		assertTrue(name.equalsIgnoreCase(name2));
+		assertFalse(firstName.equals(firstName_differenceConstructor));
+	}
+	@Test
+	public void equalsIgnoreCase_differenceString_returnFalse() {
+		assertFalse(firstName.equalsIgnoreCase(lastName));
 	}
 }
