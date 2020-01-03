@@ -62,5 +62,17 @@ public class StringApiTests {
 			firstName.charAt(firstName.length() + 1);
 		});
 	}
-	
+	//chars() 생략, 각 문자를 int값으로 치환한 값을 intStream으로 리턴해줌.
+	@Test
+	public void compareTo_lessThenTarget_returnPositive() {
+		assertTrue(firstName.compareTo(lastName) > 0);
+	}
+	@Test
+	public void compareTo_greaterThenTarget_returnNegative() {
+		assertTrue(lastName.compareTo(firstName) < 0);		
+	}
+	@Test
+	public void compareTo_sameValue_returnZero() {
+		assertEquals(0, firstName.compareTo(firstName));
+	}
 }
