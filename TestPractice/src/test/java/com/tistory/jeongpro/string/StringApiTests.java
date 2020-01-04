@@ -95,4 +95,24 @@ public class StringApiTests {
 	public void concat_emptyStringTarget_returnOriginString() {
 		assertEquals(firstName, firstName.concat(""));
 	}
+	@Test
+	public void contains_isExistSameSomething_returnTrue() {
+		assertTrue(firstName.contains("p"));
+	}
+	@Test
+	public void contains_isNotExistString_returnFalse() {
+		assertFalse(firstName.contains("helloworld"));
+	}
+	@Test
+	public void contains_isExistSameString_returnTrue() {
+		assertTrue(firstName.contains(firstName));
+	}
+	@Test
+	public void contains_differenceConstructorString_returnTrue() {
+		assertTrue(firstName.contains(firstName_differenceConstructor));
+	}
+	@Test
+	public void contains_upperCaseTarget_returnFalse() {
+		assertFalse(firstName.contains(firstName_upper));
+	}
 }
