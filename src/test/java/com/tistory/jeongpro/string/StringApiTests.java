@@ -115,4 +115,14 @@ public class StringApiTests {
 	public void contains_upperCaseTarget_returnFalse() {
 		assertFalse(firstName.contains(firstName_upper));
 	}
+	//contentEquals 생략 -> 문자열이 100%동일해야 true 이외 false
+	@Test
+	public void endWith_existSuffix_returnTrue(){
+		assertTrue(firstName.endsWith("ro"));
+	}
+	@Test
+	public void endWith_notExistSuffix_returnFalse(){
+		assertFalse(firstName.endsWith(lastName));
+	}
+
 }
