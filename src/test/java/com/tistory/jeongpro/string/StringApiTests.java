@@ -160,6 +160,18 @@ public class StringApiTests {
 	public void isEmpty_emptyString_returnTrue(){
 		assertTrue("".isEmpty());
 	}
+	@Test
+	public void replace_firstChar_returnUpdatedString(){
+		assertEquals("aro",firstName.replace("p","a"));
+	}
+	@Test
+	public void replace_isNotExist_returnOrigin(){
+		assertEquals(firstName, firstName.replace("g","hello"));
+	}
+	@Test
+	public void replace_existDoubleString_return(){
+		assertEquals("hello world hello", "hi world hi".replace("hi","hello"));
+	}
 //	@Test
 //	public void asdf(){
 //		firstName.isBlank();
