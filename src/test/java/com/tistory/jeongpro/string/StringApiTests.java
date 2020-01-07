@@ -124,5 +124,44 @@ public class StringApiTests {
 	public void endWith_notExistSuffix_returnFalse(){
 		assertFalse(firstName.endsWith(lastName));
 	}
-
+	@Test
+	public void endWith_upperCaseSuffix_returnFalse(){
+		assertFalse(firstName.endsWith(firstName_upper));
+	}
+	@Test
+	public void endWith_containsSuffix_returnFalse(){
+		assertFalse(firstName.endsWith("pr"));
+	}
+	@Test
+	public void isBlank_normal_returnFalse(){
+		assertFalse(firstName.isBlank());
+	}
+	@Test
+	public void isBlank_normalContainsBlank_returnFalse(){
+		assertFalse((firstName + " ").isBlank());
+	}
+	@Test
+	public void isBlank_ThreeBlankString_returnTrue(){
+		assertTrue("   ".isBlank());
+	}
+	@Test
+	public void isBlank_blank_returnTrue(){
+		assertTrue("".isBlank());
+	}
+	@Test
+	public void isEmpty_normal_returnFalse(){
+		assertFalse(firstName.isEmpty());
+	}
+	@Test
+	public void isEmpty_ThreeBlank_returnFalse(){
+		assertFalse("   ".isEmpty());
+	}
+	@Test
+	public void isEmpty_emptyString_returnTrue(){
+		assertTrue("".isEmpty());
+	}
+//	@Test
+//	public void asdf(){
+//		firstName.isBlank();
+//	}
 }
