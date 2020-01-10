@@ -172,6 +172,22 @@ public class StringApiTests {
 	public void replace_existDoubleString_return(){
 		assertEquals("hello world hello", "hi world hi".replace("hi","hello"));
 	}
+	@Test
+	public void startsWith_existPrefix_returnTrue(){
+		assertTrue(firstName.startsWith("pr"));
+	}
+	@Test
+	public void startsWith_notExistPrefix_returnFalse(){
+		assertFalse(firstName.startsWith(lastName));
+	}
+	@Test
+	public void startsWith_upperCasePrefix_returnFalse(){
+		assertFalse(firstName.startsWith(firstName_upper));
+	}
+	@Test
+	public void endWith_containsPrefix_returnFalse(){
+		assertFalse(firstName.startsWith("ro"));
+	}
 //	@Test
 //	public void asdf(){
 //		firstName.isBlank();
