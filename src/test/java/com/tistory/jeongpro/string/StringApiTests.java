@@ -189,10 +189,6 @@ public class StringApiTests {
 		assertFalse(firstName.startsWith("ro"));
 	}
 	@Test
-	public void indexOf_inputValueIsZero_returnNegativeOne(){
-		assertEquals(-1, firstName.indexOf(79));
-	}
-	@Test
 	public void indexOf_inputValueIsString_returnFirstIndex(){
 		assertEquals(0, firstName.indexOf("pr"));
 	}
@@ -207,5 +203,21 @@ public class StringApiTests {
 	@Test
 	public void indexOf_inputValueIsExistAndFindAfterSomeIndex_returnNormalIndex(){
 		assertEquals(3, "propropro".indexOf("pr",1));
+	}
+	@Test
+	public void lastIndexOf_inputValueIsString_returnLastIndex(){
+		assertEquals(1, firstName.lastIndexOf("ro"));
+	}
+	@Test
+	public void lastIndexOf_inputValueIsExistChar_returnNormalIndex(){
+		assertEquals(2, firstName.lastIndexOf('o'));
+	}
+	@Test
+	public void indexOf_inputValueIsExistAndRepeatTwice_returnLastSameIndex(){
+		assertEquals(6, "propropro".lastIndexOf("pr"));
+	}
+	@Test
+	public void lastIndexOf_inputValueIsExistAndFindAfterSomeIndex_returnNormalIndex(){
+		assertEquals(3, "propropro".lastIndexOf("pr",5));
 	}
 }
