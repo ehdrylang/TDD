@@ -185,11 +185,27 @@ public class StringApiTests {
 		assertFalse(firstName.startsWith(firstName_upper));
 	}
 	@Test
-	public void endWith_containsPrefix_returnFalse(){
+	public void startsWith_containsPrefix_returnFalse(){
 		assertFalse(firstName.startsWith("ro"));
 	}
-//	@Test
-//	public void asdf(){
-//		firstName.isBlank();
-//	}
+	@Test
+	public void indexOf_inputValueIsZero_returnNegativeOne(){
+		assertEquals(-1, firstName.indexOf(79));
+	}
+	@Test
+	public void indexOf_inputValueIsString_returnFirstIndex(){
+		assertEquals(0, firstName.indexOf("pr"));
+	}
+	@Test
+	public void indexOf_inputValueIsExistChar_returnNormalIndex(){
+		assertEquals(0, firstName.indexOf('p'));
+	}
+	@Test
+	public void indexOf_inputValueIsExistAndRepeatTwice_returnFirstSameIndex(){
+		assertEquals(0, "propropro".indexOf("pr"));
+	}
+	@Test
+	public void indexOf_inputValueIsExistAndFindAfterSomeIndex_returnNormalIndex(){
+		assertEquals(3, "propropro".indexOf("pr",1));
+	}
 }
