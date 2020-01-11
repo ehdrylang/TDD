@@ -237,4 +237,16 @@ public class StringApiTests {
 	public void toLowerCase_withKoreanAndNumber_returnOnlyEnglishLowercase(){
 		assertEquals("hello123월드world", "HELLO123월드WORLD".toLowerCase());
 	}
+	@Test
+	public void trim_existPrefixBlank_returnRemovedPrefixBlank(){
+		assertEquals("helloworld", "       helloworld".trim());
+	}
+	@Test
+	public void trim_existBlankBetweenWordAndWord_returnExistBlank(){
+		assertEquals("h e l l o", "h e l l o".trim());
+	}
+	@Test
+	public void trim_existOnlyBlank_returnBlank(){
+		assertEquals("", "         ".trim());
+	}
 }
