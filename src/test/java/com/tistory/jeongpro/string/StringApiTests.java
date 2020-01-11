@@ -229,4 +229,12 @@ public class StringApiTests {
 	public void toUpperCase_withKorenAndNumber_returnOnlyEnglishUppercase(){
 		assertEquals("HELLO1월드WORLD","hello1월드world".toUpperCase());
 	}
+	@Test
+	public void toLowerCase_onlyEnglish_returnLowerCase(){
+		assertEquals("hello", "HELLO".toLowerCase());
+	}
+	@Test
+	public void toLowerCase_withKoreanAndNumber_returnOnlyEnglishLowercase(){
+		assertEquals("hello123월드world", "HELLO123월드WORLD".toLowerCase());
+	}
 }
