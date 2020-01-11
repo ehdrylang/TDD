@@ -249,4 +249,20 @@ public class StringApiTests {
 	public void trim_existOnlyBlank_returnBlank(){
 		assertEquals("", "         ".trim());
 	}
+	@Test
+	public void subString_startIndex_returnRemainStringIndexToEnd(){
+		assertEquals("loworld", "helloworld".substring(3));
+	}
+	@Test
+	public void subString_NegativeIndex_returnThrow(){
+		assertThrows(IndexOutOfBoundsException.class, ()->"helloworld".substring(-1));
+	}
+	@Test
+	public void subString_OverflowIndex_returnThrow(){
+		assertThrows(IndexOutOfBoundsException.class, ()->"helloworld".substring(1000));
+	}
+	@Test
+	public void subString_StartIndexWithEndIndex_returnMiddleString(){
+		assertEquals("java", "hellojavaworld".substring(5,9));
+	}
 }
