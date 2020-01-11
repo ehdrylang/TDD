@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootTest
 public class StringApiTests {
@@ -219,5 +220,13 @@ public class StringApiTests {
 	@Test
 	public void lastIndexOf_inputValueIsExistAndFindAfterSomeIndex_returnNormalIndex(){
 		assertEquals(3, "propropro".lastIndexOf("pr",5));
+	}
+	@Test
+	public void toUpperCase_onlyEnglish_returnUppercase(){
+		assertEquals(firstName_upper, firstName.toUpperCase());
+	}
+	@Test
+	public void toUpperCase_withKorenAndNumber_returnOnlyEnglishUppercase(){
+		assertEquals("HELLO1월드WORLD","hello1월드world".toUpperCase());
 	}
 }
