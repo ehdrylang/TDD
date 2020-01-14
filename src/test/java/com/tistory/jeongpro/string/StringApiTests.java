@@ -5,10 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @SpringBootTest
 public class StringApiTests {
@@ -264,5 +268,35 @@ public class StringApiTests {
 	@Test
 	public void subString_StartIndexWithEndIndex_returnMiddleString(){
 		assertEquals("java", "hellojavaworld".substring(5,9));
+	}
+	@Test
+	public void split_NoneMatchPattern_returnOriginString(){
+		String[] stringArray = firstName.split("hello");
+		assertEquals(1, stringArray.length);
+		assertEquals(firstName, stringArray[0]);
+	}
+	@Test
+	public void split_specifyChar_returnStringArray(){
+		String[] stringArray = "pro,jeong,hello".split(",");
+		assertEquals(3, stringArray.length);
+		assertEquals(firstName, stringArray[0]);
+	}
+	@Test
+	public void split_regex_returnStringArray(){
+		String[] stringArray = "a-ab-bc-bd-abc-aa-bbc".split("a+");
+		assertEquals(5, stringArray.length);
+	}
+	@Test
+	public void split_regexOnlyDot_returnLengthZeroArray(){
+		String[] stringArray = "i wanna make a money".split(".");
+		assertEquals(0, stringArray.length);
+	}
+	@Test
+	public void split_limit3_returnLengthThreeStringArray(){
+		String[] stringArray = "http://192.168.0.111:19000/posts.world.hello.aa".split("\\.",3);
+		for(int i=0;i<stringArray.length;i++){
+			System.out.println(stringArray[i]);
+		}
+		assertEquals(3, stringArray.length);
 	}
 }
