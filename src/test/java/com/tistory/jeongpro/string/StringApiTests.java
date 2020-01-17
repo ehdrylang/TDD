@@ -246,6 +246,11 @@ public class StringApiTests {
 		assertEquals("helloworld", "       helloworld".trim());
 	}
 	@Test
+	public void trim_existU205FEmptyString_returnCantTrim(){
+		String str = "hello\u205F";
+		assertEquals(str, str.trim());
+	}
+	@Test
 	public void trim_existBlankBetweenWordAndWord_returnExistBlank(){
 		assertEquals("h e l l o", "h e l l o".trim());
 	}
@@ -301,7 +306,7 @@ public class StringApiTests {
 	}
 	@Test
 	public void matches_existChar_returnTrue(){
-		assertTrue(firstName.matches("p"));
+		assertTrue(firstName.matches("p.*"));
 	}
 	@Test
 	public void matches_notExistChar_returnFalse(){
@@ -310,5 +315,11 @@ public class StringApiTests {
 	@Test
 	public void matches_existRegexIpPattern_returnTrue(){
 		assertTrue("http://192.168.0.111:8080".matches("(?:https?)://(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):(6553[0-5]|655[0-2][0-9]|65[0-4][0-9][0-9]|6[0-4][0-9][0-9][0-9]|\\d{2,4}|[1-9]).*"));
+	}
+	@Test
+	public void strip_existU205F_returnTrimString(){
+		String stringWithWhiteSpace = "hello\u205F";
+		System.out.println(stringWithWhiteSpace + "world");
+		assertEquals("hello", stringWithWhiteSpace.strip());
 	}
 }
