@@ -10,8 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class ListTest {
@@ -63,5 +62,19 @@ public class ListTest {
     @Test
     public void add_givenNullToLinkedList_returnTrue(){
         assertTrue(linkedList.add(null));
+    }
+    @Test
+    public void clear_asList_throwsUnSupportedOperationException(){
+        assertThrows(UnsupportedOperationException.class, ()->asList.clear());
+    }
+    @Test
+    public void clear_arrayList_returnSizeZero(){
+        arrayList.clear();
+        assertEquals(0, arrayList.size());
+    }
+    @Test
+    public void clear_linkedList_returnSizeZero(){
+        linkedList.clear();
+        assertEquals(0, linkedList.size());
     }
 }
