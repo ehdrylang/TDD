@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.validation.constraints.Null;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -64,6 +65,15 @@ public class ListTest {
         assertTrue(linkedList.add(null));
     }
     @Test
+    public void add_givenBigIndex_returnIndexOutOfBoundsException(){
+        assertThrows(IndexOutOfBoundsException.class, () ->arrayList.add(Integer.MAX_VALUE ,"a"));
+    }
+    @Test
+    public void add_givenIndex_returnIndexValue(){
+        arrayList.add(3,"6");
+        assertEquals("6", arrayList.get(3));
+    }
+    @Test
     public void clear_asList_throwsUnSupportedOperationException(){
         assertThrows(UnsupportedOperationException.class, ()->asList.clear());
     }
@@ -76,5 +86,21 @@ public class ListTest {
     public void clear_linkedList_returnSizeZero(){
         linkedList.clear();
         assertEquals(0, linkedList.size());
+    }
+    @Test
+    public void addAll_asListGivenLinkedList_returnUnsupportedOperationException(){
+        assertThrows(UnsupportedOperationException.class, ()->asList.addAll(linkedList));
+    }
+    @Test
+    public void addAll_arrayListGivenLinkedList_returnSumSize(){
+        int sum = arrayList.size() + linkedList.size();
+        arrayList.addAll(linkedList);
+        assertEquals(sum, arrayList.size());
+    }
+    @Test
+    public void addAll_linkedListGivenArrayList_returnSumSize(){
+        int sum = arrayList.size() + linkedList.size();
+        linkedList.addAll(arrayList);
+        assertEquals(sum, linkedList.size());
     }
 }
