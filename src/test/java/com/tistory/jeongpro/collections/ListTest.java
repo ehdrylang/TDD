@@ -103,4 +103,17 @@ public class ListTest {
         linkedList.addAll(arrayList);
         assertEquals(sum, linkedList.size());
     }
+    @Test
+    public void size_addNull_returnPlusOne(){
+        int size = arrayList.size();
+        arrayList.add(null);
+        assertEquals(size + 1, arrayList.size());
+    }
+    @Test
+    public void size_addElementGreaterThanIntegerMax_returnIntegerMaxSize(){
+        for(int i=0;i<Integer.MAX_VALUE;i++){
+            arrayList.add(""+i);
+        }
+        assertEquals(Integer.MAX_VALUE, arrayList.size());
+    }
 }
