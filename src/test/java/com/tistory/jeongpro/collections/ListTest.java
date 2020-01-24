@@ -1,6 +1,7 @@
 package com.tistory.jeongpro.collections;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -110,10 +111,20 @@ public class ListTest {
         assertEquals(size + 1, arrayList.size());
     }
     @Test
+    @Disabled
     public void size_addElementGreaterThanIntegerMax_returnIntegerMaxSize(){
         for(int i=0;i<Integer.MAX_VALUE;i++){
             arrayList.add(""+i);
         }
         assertEquals(Integer.MAX_VALUE, arrayList.size());
+    }
+    @Test
+    public void isEmpty_ExistElement_returnfalse(){
+        assertFalse(asList.isEmpty());
+    }
+    @Test
+    public void isEmpty_DontExistElement_returnTrue(){
+        linkedList = new LinkedList<>();
+        assertTrue(linkedList.isEmpty());
     }
 }
