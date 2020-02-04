@@ -9,15 +9,25 @@ import java.util.List;
  */
 public class BowlingGame {
     private List<Frame> frames;
+    private int currentFrame;
 
     public BowlingGame(){
         this.frames = new ArrayList<>();
+        this.currentFrame = 0;
         for(int i=0;i<10;i++){
             frames.add(new Frame());
         }
     }
-
     public int getTotalFrameCount() {
-        return 10;
+        return this.frames.size();
+    }
+
+    public void progress(int i) {
+        frames.get(currentFrame).bowl(i);
+    }
+
+    public int getScore() {
+        //종료되었다면...
+        for(int )
     }
 }
