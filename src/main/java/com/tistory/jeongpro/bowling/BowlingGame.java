@@ -23,11 +23,24 @@ public class BowlingGame {
     }
 
     public void progress(int i) {
-        frames.get(currentFrame).bowl(i);
+        if(frames.size() == currentFrame){
+            return;
+        }
+        Frame frame = frames.get(currentFrame);
+        frame.bowl(i);
+
     }
 
     public int getScore() {
         //종료되었다면...
-        for(int )
+        int sum = 0;
+        for(Frame frame : frames){
+            sum += frame.getScore();
+        }
+        return sum;
+    }
+
+    public int getRemaingChance() {
+        return frames.get(currentFrame).getRemaingChance();
     }
 }

@@ -55,4 +55,25 @@ public class BowlingGameTest {
         }
         assertEquals(0, bowlingGame.getScore());
     }
+
+    /**
+     * 모든 프레임에서 스트라이크를 했다면 300점이다
+     */
+    @Test
+    public void givenPerfect_whenEveryFrame_thenScoreIsThreeHundred(){
+        for(int i=0;i<12;i++){
+            bowlingGame.progress(10);
+        }
+        assertEquals(300, bowlingGame.getScore());
+    }
+    /**
+     * 마지막 프레임에서 스트라이크를 했다면 2번의 추가 기회가 주어진다.
+     */
+    public void givenStrike_whenLastFrame_thenGetTwoChance(){
+        for(int i=0;i<18;i++){
+            bowlingGame.progress(3);
+        }
+        bowlingGame.progress(10);
+        assertEquals(2, bowlingGame.getRemaingChance());
+    }
 }
