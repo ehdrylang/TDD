@@ -20,10 +20,12 @@ public class Frame {
     public int getRemaingPins() {
         return this.pins;
     }
-
-    public void bowl(int downPins ) {
+    private boolean isValidBowl(int bowl){
+        return bowl >= 0 && bowl <= 10;
+    }
+    public void bowl(int downPins) {
         //score validation
-        if(downPins < 0 || downPins > 10){
+        if(!isValidBowl(downPins)){
             return;
         }
         this.count--;
@@ -58,5 +60,9 @@ public class Frame {
     }
     public int getScore() {
         return score;
+    }
+
+    public boolean isEnd() {
+        return count == 0;
     }
 }

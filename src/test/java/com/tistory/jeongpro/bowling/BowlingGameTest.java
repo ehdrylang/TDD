@@ -69,8 +69,9 @@ public class BowlingGameTest {
     /**
      * 마지막 프레임에서 스트라이크를 했다면 2번의 추가 기회가 주어진다.
      */
-    public void givenStrike_whenLastFrame_thenGetTwoChance(){
-        for(int i=0;i<18;i++){
+    @Test
+    public void givenStrike_whenLastFrame_thenGetTwoChance() {
+        for (int i = 0; i < 18; i++) {
             bowlingGame.progress(3);
         }
         bowlingGame.progress(10);
