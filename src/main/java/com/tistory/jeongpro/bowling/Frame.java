@@ -1,6 +1,6 @@
 package com.tistory.jeongpro.bowling;
 
-public class Frame {
+public class Frame implements BaseFrame {
     private int count;
     private int pins;
     private int score;
@@ -41,7 +41,7 @@ public class Frame {
         //스페어일 때 처리
         if(pins == 0 && count == 0){
             spare = Boolean.TRUE;
-            bonusCount += 1;
+            bonusCount++;
             return;
         }
     }
