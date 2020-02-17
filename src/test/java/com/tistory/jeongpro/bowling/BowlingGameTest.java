@@ -75,6 +75,6 @@ public class BowlingGameTest {
             bowlingGame.progress(3);
         }
         bowlingGame.progress(10);
-        assertEquals(2, bowlingGame.getRemaingChance());
+        assertEquals(2, bowlingGame.());
     }
 }

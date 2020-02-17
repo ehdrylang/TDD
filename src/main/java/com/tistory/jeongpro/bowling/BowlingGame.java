@@ -34,16 +34,16 @@ public class BowlingGame {
     public void progress(int i) {
         //게임이 종료되었으면 무시한다.
         if(isEnd()){return;}
-        Frame frame = frames.get(currentFrame);
+        BaseFrame frame = frames.get(currentFrame);
         frame.bowl(i);
         //add bonus
         int pre = currentFrame - 1;
         int pre2 = currentFrame - 2;
         if(pre > 0){
-            frames.get(pre).addBonusScore(i);
+            frames.get(pre).bowl(i);
         }
         if(pre2 > 0){
-            frames.get(pre).addBonusScore(i);
+            frames.get(pre).bowl(i);
         }
         if(frame.isEnd()){
             nextFrame();
@@ -62,16 +62,12 @@ public class BowlingGame {
     }
     private int calcScore(){
         int sum = 0;
-        for(Frame frame : frames){
+        for(BaseFrame frame : frames){
             sum += frame.getScore();
         }
         return sum;
     }
     private boolean isEnd(){
         return frames.size() <= currentFrame;
-    }
-
-    public int getRemaingChance() {
-        return frames.get(currentFrame).getRemaingChance();
     }
 }

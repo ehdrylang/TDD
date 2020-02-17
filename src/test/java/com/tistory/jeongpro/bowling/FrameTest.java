@@ -24,8 +24,8 @@ public class FrameTest {
      */
     @Test
     public void whenInitialize_thenTwoChanceAndTenPins(){
-       assertEquals(2, frame.getRemaingChance());
-       assertEquals(10, frame.getRemaingPins());
+       assertEquals(2, frame.getPins());
+       assertEquals(10, frame.getPins());
     }
 
     /**
@@ -36,8 +36,8 @@ public class FrameTest {
         //given
         frame.bowl(5);
         //then
-        assertEquals(5, frame.getRemaingPins());
-        assertEquals(1, frame.getRemaingChance());
+        assertEquals(5, frame.getPins());
+        assertEquals(1, frame.getChance());
     }
     /**
      * 프레임이 종료되었는데 더 진행하려고 하면 안된다.
