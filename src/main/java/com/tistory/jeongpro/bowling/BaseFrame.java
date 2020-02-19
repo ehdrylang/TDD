@@ -24,31 +24,37 @@ public abstract class BaseFrame {
         return pins;
     }
 
-    public void addScore(int score){
-        this.score += score;
+    public void addScore(int score) {
+        if(bonusChance > 0) {
+            this.score += score;
+            this.bonusChance--;
+        }
     }
     public int getScore(){
         return score;
     }
     public void bowl(int count){
         //validation
-        if(!isValidBowl(count)){return;}
-        if(isEnd()){return;}
+        if(!isValidBowl(count)){
+            throw new RuntimeException("Invalid count");
+        }
+        if(isEnd()){
+            throw new RuntimeException("You can't proceed any more");
+        }
         chance--;
         pins -= count;
         score += count;
         //스트라이크 처리
         if(!isStrike && pins == 0 && chance == 1){
             isStrike = Boolean.TRUE;
-            chance = 2;
-            pins = 10;
+            bonusChance = 2;
+            chance = 0;
             return;
         }
         //스페어 처리
         if(!isStrike && pins == 0 && chance == 0){
             isSpare = Boolean.TRUE;
-            chance = 1;
-            pins = 10;
+            bonusChance = 1;
         }
     }
     public boolean isValidBowl(int count){

@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.AssertionErrors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * 하나의 두 번의 기회가 주어지고
@@ -24,7 +23,7 @@ public class FrameTest {
      */
     @Test
     public void whenInitialize_thenTwoChanceAndTenPins(){
-       assertEquals(2, frame.getPins());
+       assertEquals(2, frame.getChance());
        assertEquals(10, frame.getPins());
     }
 
@@ -40,7 +39,7 @@ public class FrameTest {
         assertEquals(1, frame.getChance());
     }
     /**
-     * 프레임이 종료되었는데 더 진행하려고 하면 안된다.
+     * 프레임이 종료되면 더 이상 진행할 수 없다.
      */
     @Test
     public void givenTwoBowling_whenThereAreNoPins_thenReturnTrue(){
@@ -48,6 +47,8 @@ public class FrameTest {
         frame.bowl(5);
         frame.bowl(3);
         assertTrue(frame.isEnd());
+        assertThrows(RuntimeException.class, ()->frame.bowl(4));
     }
+
 
 }

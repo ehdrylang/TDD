@@ -5,8 +5,12 @@ public class LastFrame extends BaseFrame {
         super(2);
     }
     public void bowl(int count){
-        if(!isValidBowl(count)){return;}
-        if(isEnd()){return;}
+        if(!isValidBowl(count)){
+            throw new RuntimeException("Invalid Count");
+        }
+        if(isEnd()){
+            throw new RuntimeException("You can't proceed any more");
+        }
         chance--;
         pins -= count;
         score += count;
@@ -14,15 +18,18 @@ public class LastFrame extends BaseFrame {
         if(!isStrike && pins == 0 && chance == 1){
             pins = 10;
             isStrike = Boolean.TRUE;
+            chance++;
             return;
         }
-        //2구 스트라이크
-        if(isStrike && pins == 0 && chance == 0){
+        //1구 스트라이크 이후 2구 스트라이크
+        if(isStrike && pins == 0 && chance == 1){
             pins = 10;
         }
-        //2구 스페어
-        if(pins == 0 && chance == 1){
+        //스페어
+        if(!isStrike && pins == 0 && chance == 0){
+            isSpare = Boolean.TRUE;
             pins = 10;
+            chance++;
         }
     }
 }

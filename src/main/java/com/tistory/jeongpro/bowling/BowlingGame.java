@@ -39,11 +39,11 @@ public class BowlingGame {
         //add bonus
         int pre = currentFrame - 1;
         int pre2 = currentFrame - 2;
-        if(pre > 0){
-            frames.get(pre).bowl(i);
+        if(pre >= 0){
+            frames.get(pre).addScore(i);
         }
-        if(pre2 > 0){
-            frames.get(pre).bowl(i);
+        if(pre2 >= 0){
+            frames.get(pre2).addScore(i);
         }
         if(frame.isEnd()){
             nextFrame();
@@ -66,6 +66,10 @@ public class BowlingGame {
             sum += frame.getScore();
         }
         return sum;
+    }
+    public int getChance(){
+        return frames.get(currentFrame)
+                    .getChance();
     }
     private boolean isEnd(){
         return frames.size() <= currentFrame;
