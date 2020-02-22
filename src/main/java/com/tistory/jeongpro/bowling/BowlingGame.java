@@ -18,6 +18,9 @@ import java.util.List;
 public class BowlingGame {
     private List<BaseFrame> frames;
     private int currentFrame;
+    private int score;
+    private int[] rolls = new int [21];
+    private int currentRoll = 0;
 
     public BowlingGame(){
         this.frames = new ArrayList<>();
@@ -26,16 +29,20 @@ public class BowlingGame {
             frames.add(new Frame());
         }
         frames.add(new LastFrame());
+        this.score = 0;
     }
     public int getTotalFrameCount() {
         return this.frames.size();
     }
 
-    public void progress(int i) {
+    public void play(int i) {
         //게임이 종료되었으면 무시한다.
         if(isEnd()){return;}
         BaseFrame frame = frames.get(currentFrame);
         frame.bowl(i);
+
+
+
         //add bonus
         int pre = currentFrame - 1;
         int pre2 = currentFrame - 2;
@@ -58,14 +65,17 @@ public class BowlingGame {
         if(!isEnd()){
             return 0;
         }
-        return calcScore();
-    }
-    private int calcScore(){
-        int sum = 0;
+        //점수 계산하기
+        int score = 0;
+        int firstBowl = 0;
         for(BaseFrame frame : frames){
-            sum += frame.getScore();
+            if(frame.isSpare()){
+                //해당 프레임이 스페어(10점)일 때는 다음 프레임의 첫 번 째 점수를 합산한다.
+                score += 10 + frame.getScore(firstBowl);
+            }
+            score += frame.getScore(firstBowl) + frame.getScore(firstBowl + 1);
         }
-        return sum;
+        return score;
     }
     public int getChance(){
         return frames.get(currentFrame)

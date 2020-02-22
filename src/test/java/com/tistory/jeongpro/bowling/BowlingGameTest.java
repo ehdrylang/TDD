@@ -4,10 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * 볼링 게임
@@ -22,13 +21,6 @@ public class BowlingGameTest {
     }
 
     /**
-     * 게임을 생성할 수 있다
-     */
-    @Test
-    public void createBowlingGame(){
-        assertNotNull(this.bowlingGame);
-    }
-    /**
      * 하나의 게임은 10개의 프레임을 갖고 있다.
      */
     @Test
@@ -42,18 +34,66 @@ public class BowlingGameTest {
      */
     @Test
     public void givenPins_whenProgress(){
-        bowlingGame.progress(1);
+        bowlingGame.play(0);
     }
 
     /**
      * 모든 프레임의 기회에서 한 개도 핀을 쓰러트리지 못했을 때 0점이다
+     * gutter
      */
     @Test
     public void givenZeroPins_whenEveryFrame_thenScoreIsZero(){
-        for(int i=0;i<20;i++){
-            bowlingGame.progress(0);
-        }
+        playMany(20, 0);
         assertEquals(0, bowlingGame.getScore());
+    }
+
+    /**
+     * 매 프레임에서 1개의 핀씩 쓰러트렸을 때 점수는 20점이다.
+     */
+    @Test
+    private void allOnes(){
+        playMany(20, 1);
+        assertEquals(20, bowlingGame.getScore());
+    }
+
+    /**
+     * 스페어가 한 번 발생했을 때 점수 계산
+     */
+    @Test
+    public void oneSpare(){
+        playSpare();
+        bowlingGame.play(3);
+        playMany(17, 0);
+        assertEquals(16, bowlingGame.getScore());
+
+    }
+
+    private void playSpare() {
+        bowlingGame.play(5);
+        bowlingGame.play(5);
+    }
+
+    /**
+     * 스트라이크가 한 번 발생했을 때 점수 계산
+     */
+    @Test
+    public void oneStrike(){
+        bowlingGame.play(10);
+        bowlingGame.play(5);
+        bowlingGame.play(3);
+        playMany(16, 0 );
+        assertEquals(26, bowlingGame.getScore());
+    }
+
+    /**
+     * 메서드 추출한 것.
+     * @param frameCount
+     * @param pins
+     */
+    private void playMany(int frameCount, int pins) {
+        for (int i = 0; i < frameCount; i++) {
+            bowlingGame.play(pins);
+        }
     }
 
     /**
@@ -61,9 +101,7 @@ public class BowlingGameTest {
      */
     @Test
     public void givenPerfect_whenEveryFrame_thenScoreIsThreeHundred(){
-        for(int i=0;i<12;i++){
-            bowlingGame.progress(10);
-        }
+        playMany(12, 10);
         assertEquals(300, bowlingGame.getScore());
     }
     /**
@@ -71,10 +109,8 @@ public class BowlingGameTest {
      */
     @Test
     public void givenStrike_whenLastFrame_thenGetTwoChance() {
-        for (int i = 0; i < 18; i++) {
-            bowlingGame.progress(3);
-        }
-        bowlingGame.progress(10);
+        playMany(18, 3);
+        bowlingGame.play(10);
         assertEquals(2, bowlingGame.getChance());
     }
 }
