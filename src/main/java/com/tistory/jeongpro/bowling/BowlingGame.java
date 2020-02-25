@@ -16,7 +16,7 @@ import java.util.List;
  * method가 한 가지 일만 하도록 최대한 작게 만들어라.
  */
 public class BowlingGame {
-    private List<BaseFrame> frames;
+    private List<Frame> frames;
     private int currentFrame;
     private int score;
     private int[] rolls = new int [21];
@@ -38,37 +38,27 @@ public class BowlingGame {
     public void play(int i) {
         //게임이 종료되었으면 무시한다.
         if(isEnd()){return;}
-        BaseFrame frame = frames.get(currentFrame);
+        Frame frame = frames.get(currentFrame);
         frame.bowl(i);
-
-
-
-        //add bonus
-        int pre = currentFrame - 1;
-        int pre2 = currentFrame - 2;
-        if(pre >= 0){
-            frames.get(pre).addScore(i);
-        }
-        if(pre2 >= 0){
-            frames.get(pre2).addScore(i);
-        }
         if(frame.isEnd()){
             nextFrame();
         }
     }
+
     private void nextFrame(){
         this.currentFrame++;
     }
 
     public int getScore() {
         //종료되지 않았다면 0 리턴
-        if(!isEnd()){
-            return 0;
-        }
+        if(!isEnd()){return 0;}
         //점수 계산하기
         int score = 0;
         int firstBowl = 0;
-        for(BaseFrame frame : frames){
+        for(Frame frame : frames){
+            if(frame.isStrike()){
+                score += 10;
+            }
             if(frame.isSpare()){
                 //해당 프레임이 스페어(10점)일 때는 다음 프레임의 첫 번 째 점수를 합산한다.
                 score += 10 + frame.getScore(firstBowl);
@@ -76,10 +66,6 @@ public class BowlingGame {
             score += frame.getScore(firstBowl) + frame.getScore(firstBowl + 1);
         }
         return score;
-    }
-    public int getChance(){
-        return frames.get(currentFrame)
-                    .getChance();
     }
     private boolean isEnd(){
         return frames.size() <= currentFrame;

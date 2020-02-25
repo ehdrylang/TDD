@@ -1,35 +1,27 @@
 package com.tistory.jeongpro.bowling;
 
-public class LastFrame extends BaseFrame {
+public class LastFrame extends Frame {
     public LastFrame(){
-        super(2);
+        this.score = new int[]{-1,-1,-1};
+    }
+    public boolean isEnd(){
+        return this.idx > 2;
     }
     public void bowl(int count){
+        //validation
         if(!isValidBowl(count)){
-            throw new RuntimeException("Invalid Count");
+            throw new RuntimeException("Invalid count");
         }
+        //end
         if(isEnd()){
             throw new RuntimeException("You can't proceed any more");
         }
-        chance--;
         pins -= count;
-        score += count;
-        //1구 스트라이크
-        if(!isStrike && pins == 0 && chance == 1){
-            pins = 10;
-            isStrike = Boolean.TRUE;
-            chance++;
-            return;
-        }
-        //1구 스트라이크 이후 2구 스트라이크
-        if(isStrike && pins == 0 && chance == 1){
+        score[idx] = count;
+        idx++;
+        if(isStrike()){
             pins = 10;
         }
-        //스페어
-        if(!isStrike && pins == 0 && chance == 0){
-            isSpare = Boolean.TRUE;
-            pins = 10;
-            chance++;
-        }
+        
     }
 }

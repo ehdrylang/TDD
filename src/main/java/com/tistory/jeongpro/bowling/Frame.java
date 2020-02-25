@@ -1,12 +1,12 @@
 package com.tistory.jeongpro.bowling;
 
 
-public class BaseFrame {
+public class Frame {
     protected int pins;
     protected int score[];
-    private int idx;
+    protected int idx;
 
-    public BaseFrame(){
+    public Frame(){
         this.pins = 10;
         this.score = new int[]{-1, -1};
         this.idx = 0;
