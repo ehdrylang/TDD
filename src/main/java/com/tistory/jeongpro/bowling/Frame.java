@@ -2,12 +2,10 @@ package com.tistory.jeongpro.bowling;
 
 
 public class Frame {
-    protected int pins;
     protected int score[];
     protected int idx;
 
     public Frame(){
-        this.pins = 10;
         this.score = new int[]{-1, -1};
         this.idx = 0;
     }
@@ -20,12 +18,11 @@ public class Frame {
         if(isEnd()){
             throw new RuntimeException("You can't proceed any more");
         }
-        pins -= count;
         score[idx] = count;
         idx++;
     }
     public boolean isValidBowl(int count){
-        return count >= 0 && count <= 10 && (pins - count) >= 0;
+        return count >= 0 && count <= 10;
     }
     public boolean isStrike() {
         return score[0] == 10;
@@ -34,7 +31,7 @@ public class Frame {
         return score[0] != 10 && score[0] + score[1] == 10;
     }
     public boolean isEnd(){
-        return pins == 0 || idx > 1;
+        return isStrike() || idx > 1;
     }
     public int getScore(int bowl){
         return score[bowl];

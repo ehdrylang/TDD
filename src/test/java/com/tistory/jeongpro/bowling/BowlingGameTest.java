@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.core.Is.is;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
@@ -107,10 +105,10 @@ public class BowlingGameTest {
     /**
      * 마지막 프레임에서 스트라이크를 했다면 2번의 추가 기회가 주어진다.
      */
-    @Test
+    /*@Test
     public void givenStrike_whenLastFrame_thenGetTwoChance() {
         playMany(18, 3);
         bowlingGame.play(10);
         assertEquals(2, bowlingGame.getChance());
-    }
+    }*/
 }

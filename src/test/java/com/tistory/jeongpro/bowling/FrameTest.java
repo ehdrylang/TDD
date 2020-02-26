@@ -23,21 +23,35 @@ public class FrameTest {
      */
     @Test
     public void whenInitialize_thenTwoChanceAndTenPins(){
-       assertEquals(2, frame.getChance());
-       assertEquals(10, frame.getPins());
+        frame.bowl(5);
+        assertFalse(frame.isEnd());
+        frame.bowl(3);
+        assertTrue(frame.isEnd());
     }
 
     /**
-     * 쓰러트린 볼링핀의 개수를 받아 진행할 수 있다.
+     * 스트라이크시 프레임은 종료된다.
      */
     @Test
-    public void givenPins_whenBowling_thenDecreasePins(){
-        //given
-        frame.bowl(5);
+    public void whenStrike_thenFrameEnd(){
+        //when
+        frame.bowl(10);
         //then
-        assertEquals(5, frame.getPins());
-        assertEquals(1, frame.getChance());
+        assertTrue(frame.isEnd());
     }
+
+    /**
+     * 프레임이 종료되었을 때 계속해서 게임을 진행하려고하면 예외가 발생한다.
+     */
+    @Test
+    public void givenFrameEnd_whenBowl_thenException(){
+        //given
+        frame.bowl(3);
+        frame.bowl(3);
+        //when then
+        assertThrows(RuntimeException.class, ()->frame.bowl(3));
+    }
+
     /**
      * 프레임이 종료되면 더 이상 진행할 수 없다.
      */
@@ -49,6 +63,11 @@ public class FrameTest {
         assertTrue(frame.isEnd());
         assertThrows(RuntimeException.class, ()->frame.bowl(4));
     }
-
-
+    /**
+     * 쓰러트린 핀수는 0에서 10사이의 값이어야하고 아닐 시에는 예외가 발생한다.
+     */
+    @Test
+    public void givenElevenPins_whenBowl_thenThrowException(){
+        assertThrows(RuntimeException.class, ()-> frame.bowl(11));
+    }
 }

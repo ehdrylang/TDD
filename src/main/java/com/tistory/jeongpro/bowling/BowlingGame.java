@@ -37,7 +37,7 @@ public class BowlingGame {
 
     public void play(int i) {
         //게임이 종료되었으면 무시한다.
-        if(isEnd()){return;}
+        if(isEnd()){ throw new RuntimeException("BowlingGame is End");}
         Frame frame = frames.get(currentFrame);
         frame.bowl(i);
         if(frame.isEnd()){
@@ -55,17 +55,21 @@ public class BowlingGame {
         //점수 계산하기
         int score = 0;
         int firstBowl = 0;
-        for(Frame frame : frames){
-            if(frame.isStrike()){
-                score += 10;
+        for(int i=0;i<frames.size();i++){
+            Frame frame = frames.get(i);
+            if(frames.get(i).isStrike()){
+                score += 10 + frames.get(i+1).getScore(firstBowl);
             }
-            if(frame.isSpare()){
+            if(frames.get(i).isSpare()){
                 //해당 프레임이 스페어(10점)일 때는 다음 프레임의 첫 번 째 점수를 합산한다.
-                score += 10 + frame.getScore(firstBowl);
+                score += 10 + frames.getScore(firstBowl);
             }
             score += frame.getScore(firstBowl) + frame.getScore(firstBowl + 1);
         }
         return score;
+    }
+    private boolean isLastFrame(int frameNumber){
+        return frameNumber == frames.size() -1;
     }
     private boolean isEnd(){
         return frames.size() <= currentFrame;

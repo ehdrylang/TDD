@@ -5,7 +5,7 @@ public class LastFrame extends Frame {
         this.score = new int[]{-1,-1,-1};
     }
     public boolean isEnd(){
-        return this.idx > 2;
+        return (hasBonusBowl() && this.idx > 2) || (!hasBonusBowl() && this.idx > 1);
     }
     public void bowl(int count){
         //validation
@@ -16,12 +16,10 @@ public class LastFrame extends Frame {
         if(isEnd()){
             throw new RuntimeException("You can't proceed any more");
         }
-        pins -= count;
         score[idx] = count;
         idx++;
-        if(isStrike()){
-            pins = 10;
-        }
-        
+    }
+    private boolean hasBonusBowl(){
+        return isStrike() || isSpare();
     }
 }
