@@ -62,7 +62,7 @@ public class BowlingGame {
             }
             if(frames.get(i).isSpare()){
                 //해당 프레임이 스페어(10점)일 때는 다음 프레임의 첫 번 째 점수를 합산한다.
-                score += 10 + frames.getScore(firstBowl);
+                //score += 10 + frames.getScore(firstBowl);
             }
             score += frame.getScore(firstBowl) + frame.getScore(firstBowl + 1);
         }
